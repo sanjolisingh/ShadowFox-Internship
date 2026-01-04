@@ -1,0 +1,1540 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mumbai Indians Fan Hub</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, #004BA0 0%, #0066CC 100%);
+    }
+
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-link {
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-link:hover {
+      border-bottom-color: currentColor;
+    }
+
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-transition {
+      transition: all 0.5s ease;
+    }
+
+    .active-tab {
+      border-bottom: 3px solid;
+    }
+
+    .poll-option {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .poll-option:hover {
+      transform: scale(1.02);
+    }
+
+    .match-card {
+      border-left: 4px solid;
+    }
+
+    .modal-overlay {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full w-full overflow-auto">
+  <div id="app-wrapper" class="min-h-full w-full"><!-- Navigation -->
+   <nav id="main-nav" class="w-full shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex justify-between items-center h-16">
+      <div class="flex items-center space-x-3">
+       <svg class="w-10 h-10" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="#FFD700" stroke="#004BA0" stroke-width="3" /> <path d="M 30 40 L 50 60 L 70 40 L 70 70 L 30 70 Z" fill="#004BA0" />
+       </svg>
+       <div>
+        <h1 id="nav-team-name" class="text-xl font-bold">Mumbai Indians</h1>
+        <p id="nav-tagline" class="text-xs">Duniya Hila Denge Hum</p>
+       </div>
+      </div>
+      <div class="hidden md:flex space-x-6"><a href="#home" class="nav-link font-medium">Home</a> <a href="#schedule" class="nav-link font-medium">Schedule</a> <a href="#players" class="nav-link font-medium">Players</a> <a href="#stats" class="nav-link font-medium">Stats</a> <a href="#news" class="nav-link font-medium">News</a> <a href="#fanzone" class="nav-link font-medium">Fan Zone</a>
+      </div><button id="mobile-menu-btn" class="md:hidden p-2 rounded">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+     <div id="mobile-menu" class="md:hidden hidden pb-4"><a href="#home" class="block py-2 nav-link">Home</a> <a href="#schedule" class="block py-2 nav-link">Schedule</a> <a href="#players" class="block py-2 nav-link">Players</a> <a href="#stats" class="block py-2 nav-link">Stats</a> <a href="#news" class="block py-2 nav-link">News</a> <a href="#fanzone" class="block py-2 nav-link">Fan Zone</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="home" class="w-full gradient-bg py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+     <h2 id="hero-title" class="text-5xl md:text-6xl font-bold mb-4">Welcome to Mumbai Indians</h2>
+     <p id="hero-subtitle" class="text-2xl md:text-3xl mb-8">5-Time IPL Champions</p>
+     <div class="flex flex-wrap justify-center gap-4 mb-8"><span class="px-4 py-2 rounded-full text-sm font-semibold pulse-animation">2013</span> <span class="px-4 py-2 rounded-full text-sm font-semibold pulse-animation">2015</span> <span class="px-4 py-2 rounded-full text-sm font-semibold pulse-animation">2017</span> <span class="px-4 py-2 rounded-full text-sm font-semibold pulse-animation">2019</span> <span class="px-4 py-2 rounded-full text-sm font-semibold pulse-animation">2020</span>
+     </div><button id="join-community-btn" class="px-8 py-3 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all"> Join Our Community </button>
+     <div class="mt-6 inline-block px-6 py-3 rounded-full border-2 border-white border-opacity-30 backdrop-blur-sm">
+      <p class="text-sm mb-1">MI Paltan Members</p>
+      <p id="member-count" class="text-3xl font-bold">0</p>
+     </div>
+    </div>
+   </section><!-- Match Schedule -->
+   <section id="schedule" class="w-full py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h2 class="text-4xl font-bold mb-8 text-center">Upcoming Matches</h2>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="match-card rounded-lg p-6 shadow-lg card-hover">
+       <div class="flex justify-between items-center mb-4"><span class="px-3 py-1 rounded-full text-xs font-semibold">LIVE</span> <span class="text-sm">IPL 2024</span>
+       </div>
+       <div class="text-center mb-4">
+        <p class="text-sm mb-2">Match 15</p>
+        <p class="text-lg font-bold mb-2">MI vs CSK</p>
+        <p class="text-sm">Wankhede Stadium, Mumbai</p>
+       </div>
+       <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm">Mar 25, 2024</span> <span class="text-sm font-bold">7:30 PM IST</span>
+       </div>
+      </div>
+      <div class="match-card rounded-lg p-6 shadow-lg card-hover">
+       <div class="flex justify-between items-center mb-4"><span class="px-3 py-1 rounded-full text-xs font-semibold">UPCOMING</span> <span class="text-sm">IPL 2024</span>
+       </div>
+       <div class="text-center mb-4">
+        <p class="text-sm mb-2">Match 18</p>
+        <p class="text-lg font-bold mb-2">MI vs RCB</p>
+        <p class="text-sm">Wankhede Stadium, Mumbai</p>
+       </div>
+       <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm">Mar 28, 2024</span> <span class="text-sm font-bold">7:30 PM IST</span>
+       </div>
+      </div>
+      <div class="match-card rounded-lg p-6 shadow-lg card-hover">
+       <div class="flex justify-between items-center mb-4"><span class="px-3 py-1 rounded-full text-xs font-semibold">UPCOMING</span> <span class="text-sm">IPL 2024</span>
+       </div>
+       <div class="text-center mb-4">
+        <p class="text-sm mb-2">Match 22</p>
+        <p class="text-lg font-bold mb-2">KKR vs MI</p>
+        <p class="text-sm">Eden Gardens, Kolkata</p>
+       </div>
+       <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm">Apr 01, 2024</span> <span class="text-sm font-bold">7:30 PM IST</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Players Section -->
+   <section id="players" class="w-full py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h2 class="text-4xl font-bold mb-8 text-center">Squad Players</h2>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="rohit">
+       <h3 class="text-xl font-bold mb-2">Rohit Sharma</h3>
+       <p class="text-sm mb-2">Captain • Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>243</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>6628</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>130.8</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="surya">
+       <h3 class="text-xl font-bold mb-2">Suryakumar Yadav</h3>
+       <p class="text-sm mb-2">Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>147</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>3418</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>135.2</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="tilak">
+       <h3 class="text-xl font-bold mb-2">Tilak Varma</h3>
+       <p class="text-sm mb-2">Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>38</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>934</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>140.5</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="robin">
+       <h3 class="text-xl font-bold mb-2">Robin Minz</h3>
+       <p class="text-sm mb-2">Wicket-keeper • Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>5</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>78</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>125.8</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="naman">
+       <h3 class="text-xl font-bold mb-2">Naman Dhir</h3>
+       <p class="text-sm mb-2">All-rounder</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>12</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>156</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wkts</p>
+         <p>8</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="raj">
+       <h3 class="text-xl font-bold mb-2">Raj Angad Bawa</h3>
+       <p class="text-sm mb-2">All-rounder</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>8</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>92</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wkts</p>
+         <p>5</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="danish">
+       <h3 class="text-xl font-bold mb-2">Danish Malewar</h3>
+       <p class="text-sm mb-2">Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>6</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>124</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>138.4</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="izhar">
+       <h3 class="text-xl font-bold mb-2">Mohammed Izhar</h3>
+       <p class="text-sm mb-2">Bowler</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>4</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>6</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>8.25</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="atharva">
+       <h3 class="text-xl font-bold mb-2">Atharva Ankolekar</h3>
+       <p class="text-sm mb-2">Spinner</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>10</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>12</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>7.45</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="mayankr">
+       <h3 class="text-xl font-bold mb-2">Mayank Rawat</h3>
+       <p class="text-sm mb-2">Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>7</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>98</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>142.0</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="hardik">
+       <h3 class="text-xl font-bold mb-2">Hardik Pandya</h3>
+       <p class="text-sm mb-2">All-rounder</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>106</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>1476</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wkts</p>
+         <p>42</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="shardul">
+       <h3 class="text-xl font-bold mb-2">Shardul Thakur</h3>
+       <p class="text-sm mb-2">All-rounder</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>91</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>88</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>9.05</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="ashwani">
+       <h3 class="text-xl font-bold mb-2">Ashwani Kumar</h3>
+       <p class="text-sm mb-2">Bowler</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>3</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>4</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>7.85</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="mayankm">
+       <h3 class="text-xl font-bold mb-2">Mayank Markande</h3>
+       <p class="text-sm mb-2">Leg Spinner</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>35</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>28</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>8.35</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="deepak">
+       <h3 class="text-xl font-bold mb-2">Deepak Chahar</h3>
+       <p class="text-sm mb-2">Fast Bowler</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>82</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>79</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>8.12</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="bumrah">
+       <h3 class="text-xl font-bold mb-2">Jasprit Bumrah</h3>
+       <p class="text-sm mb-2">Fast Bowler</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>133</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Wickets</p>
+         <p>165</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Econ</p>
+         <p>7.18</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+      <div class="rounded-lg p-6 text-center shadow-lg card-hover cursor-pointer" data-player="raghu">
+       <h3 class="text-xl font-bold mb-2">Raghu Sharma</h3>
+       <p class="text-sm mb-2">Batsman</p>
+       <div class="grid grid-cols-3 gap-2 text-xs mt-4">
+        <div class="p-2 rounded">
+         <p class="font-bold">Matches</p>
+         <p>9</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">Runs</p>
+         <p>142</p>
+        </div>
+        <div class="p-2 rounded">
+         <p class="font-bold">SR</p>
+         <p>128.6</p>
+        </div>
+       </div>
+       <p class="text-xs mt-3 opacity-70">Click for more info</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Statistics Section -->
+   <section id="stats" class="w-full gradient-bg py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h2 id="stats-heading" class="text-4xl font-bold mb-8 text-center">Team Statistics</h2>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="stat-card rounded-lg p-6 text-center border border-white border-opacity-20">
+       <p class="text-sm mb-2">IPL Titles</p>
+       <p class="text-4xl font-bold mb-2">5</p>
+      </div>
+      <div class="stat-card rounded-lg p-6 text-center border border-white border-opacity-20">
+       <p class="text-sm mb-2">Matches Played</p>
+       <p class="text-4xl font-bold mb-2">243</p>
+      </div>
+      <div class="stat-card rounded-lg p-6 text-center border border-white border-opacity-20">
+       <p class="text-sm mb-2">Matches Won</p>
+       <p class="text-4xl font-bold mb-2">142</p>
+      </div>
+      <div class="stat-card rounded-lg p-6 text-center border border-white border-opacity-20">
+       <p class="text-sm mb-2">Win Rate</p>
+       <p class="text-4xl font-bold mb-2">58.4%</p>
+      </div>
+     </div>
+     <div class="mt-12 rounded-lg p-6 border border-white border-opacity-20 stat-card">
+      <h3 class="text-2xl font-bold mb-6 text-center">Season Performance</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+       <div class="text-center">
+        <p class="text-sm mb-2">Highest Team Score</p>
+        <p class="text-3xl font-bold">235/9</p>
+        <p class="text-xs mt-1">vs SRH, 2017</p>
+       </div>
+       <div class="text-center">
+        <p class="text-sm mb-2">Best Bowling Figures</p>
+        <p class="text-3xl font-bold">5/7</p>
+        <p class="text-xs mt-1">Alzarri Joseph, 2019</p>
+       </div>
+       <div class="text-center">
+        <p class="text-sm mb-2">Highest Individual Score</p>
+        <p class="text-3xl font-bold">109*</p>
+        <p class="text-xs mt-1">Rohit Sharma, 2012</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- News Section -->
+   <section id="news" class="w-full py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h2 id="news-heading" class="text-4xl font-bold mb-8 text-center">Latest Updates</h2>
+     <div class="grid md:grid-cols-3 gap-6">
+      <article class="rounded-lg shadow-lg overflow-hidden card-hover">
+       <div class="p-6"><span class="text-xs font-semibold px-3 py-1 rounded-full">BREAKING NEWS</span>
+        <h3 class="text-xl font-bold mt-3 mb-2">MI Announces Squad for IPL 2024</h3>
+        <p class="text-sm mb-4">Mumbai Indians reveal their complete squad with exciting new additions and retained stars for the upcoming season.</p>
+        <div class="flex justify-between items-center text-xs"><span>2 hours ago</span> <button class="font-semibold hover:underline">Read More</button>
+        </div>
+       </div>
+      </article>
+      <article class="rounded-lg shadow-lg overflow-hidden card-hover">
+       <div class="p-6"><span class="text-xs font-semibold px-3 py-1 rounded-full">INTERVIEW</span>
+        <h3 class="text-xl font-bold mt-3 mb-2">Rohit Sharma on Team Strategy</h3>
+        <p class="text-sm mb-4">Captain Rohit Sharma shares insights on the team's preparation and strategy for the new season.</p>
+        <div class="flex justify-between items-center text-xs"><span>5 hours ago</span> <button class="font-semibold hover:underline">Read More</button>
+        </div>
+       </div>
+      </article>
+      <article class="rounded-lg shadow-lg overflow-hidden card-hover">
+       <div class="p-6"><span class="text-xs font-semibold px-3 py-1 rounded-full">TRAINING</span>
+        <h3 class="text-xl font-bold mt-3 mb-2">Team Begins Pre-Season Camp</h3>
+        <p class="text-sm mb-4">Mumbai Indians squad assembles for intensive training sessions ahead of tournament kick-off.</p>
+        <div class="flex justify-between items-center text-xs"><span>1 day ago</span> <button class="font-semibold hover:underline">Read More</button>
+        </div>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section><!-- Fan Zone -->
+   <section id="fanzone" class="w-full py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h2 class="text-4xl font-bold mb-8 text-center">Fan Zone</h2>
+     <div class="grid lg:grid-cols-2 gap-8"><!-- Poll Section -->
+      <div class="rounded-lg p-6 shadow-lg">
+       <h3 class="text-2xl font-bold mb-4">Fan Poll</h3>
+       <p class="mb-4">Who will be MI's highest run scorer this season?</p>
+       <div id="poll-container" class="space-y-3">
+        <div class="poll-option rounded-lg p-4 border-2" data-player="Rohit Sharma">
+         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Rohit Sharma</span> <span class="poll-percentage">0%</span>
+         </div>
+         <div class="w-full rounded-full h-2 overflow-hidden">
+          <div class="poll-bar h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+         </div>
+        </div>
+        <div class="poll-option rounded-lg p-4 border-2" data-player="Suryakumar Yadav">
+         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Suryakumar Yadav</span> <span class="poll-percentage">0%</span>
+         </div>
+         <div class="w-full rounded-full h-2 overflow-hidden">
+          <div class="poll-bar h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+         </div>
+        </div>
+        <div class="poll-option rounded-lg p-4 border-2" data-player="Tilak Varma">
+         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Tilak Varma</span> <span class="poll-percentage">0%</span>
+         </div>
+         <div class="w-full rounded-full h-2 overflow-hidden">
+          <div class="poll-bar h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+         </div>
+        </div>
+        <div class="poll-option rounded-lg p-4 border-2" data-player="Hardik Pandya">
+         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Hardik Pandya</span> <span class="poll-percentage">0%</span>
+         </div>
+         <div class="w-full rounded-full h-2 overflow-hidden">
+          <div class="poll-bar h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+         </div>
+        </div>
+       </div>
+       <p id="poll-message" class="text-sm mt-4 text-center hidden">Thanks for voting!</p>
+      </div><!-- Social Feed -->
+      <div class="rounded-lg p-6 shadow-lg">
+       <h3 class="text-2xl font-bold mb-4">Social Feed</h3>
+       <div class="space-y-4">
+        <div class="p-4 rounded-lg border-l-4">
+         <div class="flex items-center mb-2"><span class="font-semibold text-sm">@mipaltan</span> <span class="text-xs ml-auto">2h</span>
+         </div>
+         <p class="text-sm">The atmosphere at Wankhede is absolutely electric!</p>
+         <div class="flex gap-4 mt-3 text-xs"><button class="hover:underline">Like 2.5K</button> <button class="hover:underline">Reply 342</button> <button class="hover:underline">Share 891</button>
+         </div>
+        </div>
+        <div class="p-4 rounded-lg border-l-4">
+         <div class="flex items-center mb-2"><span class="font-semibold text-sm">@mumbaiindians</span> <span class="text-xs ml-auto">5h</span>
+         </div>
+         <p class="text-sm">Behind the scenes from today's practice session! Squad looking sharp!</p>
+         <div class="flex gap-4 mt-3 text-xs"><button class="hover:underline">Like 5.2K</button> <button class="hover:underline">Reply 567</button> <button class="hover:underline">Share 1.2K</button>
+         </div>
+        </div>
+        <div class="p-4 rounded-lg border-l-4">
+         <div class="flex items-center mb-2"><span class="font-semibold text-sm">@ImRo45</span> <span class="text-xs ml-auto">1d</span>
+         </div>
+         <p class="text-sm">Can't wait to get back on the field with this amazing team! Let's go MI!</p>
+         <div class="flex gap-4 mt-3 text-xs"><button class="hover:underline">Like 12K</button> <button class="hover:underline">Reply 1.8K</button> <button class="hover:underline">Share 3.4K</button>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Fan Forum Preview -->
+     <div class="mt-8 rounded-lg p-6 shadow-lg">
+      <div class="flex justify-between items-center mb-6">
+       <h3 class="text-2xl font-bold">Fan Forum</h3><button class="px-4 py-2 rounded font-semibold text-sm hover:shadow-lg transition-all">View All Topics</button>
+      </div>
+      <div class="space-y-4">
+       <div class="p-4 rounded-lg border hover:shadow-md transition-all cursor-pointer">
+        <div class="flex items-start justify-between">
+         <div class="flex-1">
+          <h4 class="font-bold mb-1">Predictions for MI vs CSK?</h4>
+          <p class="text-sm mb-2">What's your score prediction and key players to watch?</p>
+          <div class="flex gap-4 text-xs"><span>MIFan2024</span> <span>47 replies</span> <span>3 hours ago</span>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg border hover:shadow-md transition-all cursor-pointer">
+        <div class="flex items-start justify-between">
+         <div class="flex-1">
+          <h4 class="font-bold mb-1">Best MI Memories Over the Years</h4>
+          <p class="text-sm mb-2">Share your favorite MI moments and memories!</p>
+          <div class="flex gap-4 text-xs"><span>PalTan_Forever</span> <span>128 replies</span> <span>1 day ago</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Player Info Modal -->
+   <div id="player-modal" class="modal-overlay fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-content rounded-lg shadow-2xl max-w-2xl w-full p-8 max-h-[90vh] overflow-y-auto">
+     <div id="player-info-content"></div><button id="close-player-modal" class="mt-6 w-full px-6 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all"> Close </button>
+    </div>
+   </div><!-- Community Modal -->
+   <div id="community-modal" class="modal-overlay fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div class="modal-content rounded-lg shadow-2xl max-w-md w-full p-8 bg-white">
+     <div class="text-center mb-6">
+      <h3 class="text-3xl font-bold mb-2 text-gray-800">Join MI Family!</h3>
+      <p class="text-sm text-gray-600">Become part of the world's most passionate cricket community</p>
+     </div>
+     <form id="community-form" class="space-y-4">
+      <div><label for="member-name" class="block text-sm font-semibold mb-2 text-gray-800">Full Name</label> <input type="text" id="member-name" required placeholder="Enter your name" class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-blue-500 text-gray-800 bg-white">
+      </div>
+      <div><label for="member-email" class="block text-sm font-semibold mb-2 text-gray-800">Email Address</label> <input type="email" id="member-email" required placeholder="your.email@example.com" class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-blue-500 text-gray-800 bg-white">
+      </div>
+      <div><label for="member-city" class="block text-sm font-semibold mb-2 text-gray-800">City</label> <input type="text" id="member-city" required placeholder="Your city" class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-blue-500 text-gray-800 bg-white">
+      </div>
+      <div class="flex items-start"><input type="checkbox" id="member-updates" class="mt-1 mr-2" required> <label for="member-updates" class="text-xs text-gray-700"> I agree to receive updates about Mumbai Indians matches, news, and exclusive offers </label>
+      </div>
+      <div class="flex gap-3 pt-4"><button type="submit" class="flex-1 px-6 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all bg-yellow-400 text-blue-900" id="join-submit-btn"> Join Now </button> <button type="button" id="close-modal-btn" class="px-6 py-3 rounded-lg font-semibold border-2 border-gray-700 text-gray-700 hover:shadow-lg transition-all"> Cancel </button>
+      </div>
+     </form>
+     <div id="success-message" class="hidden text-center pt-6">
+      <h3 class="text-2xl font-bold mb-2 text-gray-800">Welcome to the Family!</h3>
+      <p class="text-sm mb-4 text-gray-600">You're now part of the MI Paltan. Check your email for exclusive content!</p><button id="close-success-btn" class="px-6 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all bg-yellow-400 text-blue-900"> Close </button>
+     </div>
+    </div>
+   </div><!-- Footer -->
+   <footer id="main-footer" class="w-full gradient-bg py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+       <h4 class="font-bold mb-4">Quick Links</h4>
+       <ul class="space-y-2 text-sm">
+        <li><a href="#schedule" class="hover:underline">Schedule</a></li>
+        <li><a href="#players" class="hover:underline">Players</a></li>
+        <li><a href="#stats" class="hover:underline">Statistics</a></li>
+        <li><a href="#news" class="hover:underline">News</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">Fan Zone</h4>
+       <ul class="space-y-2 text-sm">
+        <li><a href="#fanzone" class="hover:underline">Polls</a></li>
+        <li><a href="#fanzone" class="hover:underline">Forum</a></li>
+        <li><a href="#fanzone" class="hover:underline">Social Feed</a></li>
+        <li><a href="#" class="hover:underline">Merchandise</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">Connect</h4>
+       <div class="flex gap-4"><a href="https://x.com/mipaltan" class="hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+         </svg></a> <a href="https://www.instagram.com/mumbaiindians/" class="hover:scale-110 transition-transform" onclick="window.open('https://www.instagram.com/mumbaiindians/', '_blank'); return false;" aria-label="Instagram">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+         </svg></a> <a href="https://www.facebook.com/mumbaiindians/" class="hover:scale-110 transition-transform" onclick="window.open('https://www.facebook.com/mumbaiindians/', '_blank'); return false;" aria-label="Facebook">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+         </svg></a> <a href="https://www.youtube.com/@MumbaiIndians" class="hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+         <svg class="w-8 h-8" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+         </svg></a>
+       </div>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">Newsletter</h4>
+       <form id="newsletter-form" class="flex flex-col gap-2"><label for="newsletter-email" class="sr-only">Email address</label> <input type="email" id="newsletter-email" placeholder="Your email" class="w-full px-3 py-2 rounded text-sm text-gray-800" required> <button type="submit" class="w-full px-4 py-2 rounded text-sm font-semibold">Subscribe</button>
+       </form>
+       <p id="newsletter-message" class="text-xs mt-2 hidden">Thanks for subscribing!</p>
+      </div>
+     </div>
+     <div class="border-t border-white border-opacity-20 pt-8 text-center">
+      <p id="footer-text" class="text-sm">© 2024 Mumbai Indians Fan Hub</p>
+      <p class="text-xs mt-2">Unofficial fan website • Not affiliated with Mumbai Indians or IPL</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      background_color: "#004BA0",
+      surface_color: "#FFFFFF",
+      text_color: "#1F2937",
+      primary_action_color: "#FFD700",
+      secondary_action_color: "#0066CC",
+      font_family: "system-ui",
+      font_size: 16,
+      team_name: "Mumbai Indians",
+      team_tagline: "Duniya Hila Denge Hum",
+      hero_title: "Welcome to Mumbai Indians",
+      hero_subtitle: "5-Time IPL Champions",
+      news_heading: "Latest Updates",
+      stats_heading: "Team Statistics",
+      footer_text: "© 2024 Mumbai Indians Fan Hub"
+    };
+
+    const playerInfo = {
+      rohit: {
+        name: "Rohit Sharma",
+        role: "Captain • Batsman",
+        age: 37,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm off-break",
+        bio: "Known as 'Hitman', Rohit Sharma is one of the most successful IPL captains in history.",
+        achievements: [
+          "5x IPL Champion (2013, 2015, 2017, 2019, 2020)",
+          "Most centuries in IPL (6)",
+          "Over 6,600 runs in IPL career"
+        ],
+        stats: {
+          matches: 243,
+          runs: 6628,
+          average: 30.40,
+          strikeRate: 130.8
+        }
+      },
+      surya: {
+        name: "Suryakumar Yadav",
+        role: "Batsman",
+        age: 33,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm off-break",
+        bio: "Suryakumar Yadav is known for his 360-degree batting and innovative stroke play.",
+        achievements: [
+          "2x IPL Champion with MI",
+          "Over 3,400 runs in IPL",
+          "Known for innovative shots"
+        ],
+        stats: {
+          matches: 147,
+          runs: 3418,
+          average: 30.43,
+          strikeRate: 135.2
+        }
+      },
+      tilak: {
+        name: "Tilak Varma",
+        role: "Batsman",
+        age: 21,
+        battingStyle: "Left-hand bat",
+        bowlingStyle: "Right-arm off-break",
+        bio: "Tilak Varma is one of the most exciting young talents in Indian cricket.",
+        achievements: [
+          "Breakthrough performer in IPL 2023",
+          "Strike rate above 140",
+          "Rising star"
+        ],
+        stats: {
+          matches: 38,
+          runs: 934,
+          average: 32.20,
+          strikeRate: 140.5
+        }
+      },
+      robin: {
+        name: "Robin Minz",
+        role: "Wicket-keeper • Batsman",
+        age: 22,
+        battingStyle: "Left-hand bat",
+        bowlingStyle: "-",
+        bio: "Robin Minz is a young wicket-keeper batsman from Jharkhand.",
+        achievements: [
+          "Emerging talent",
+          "Strong wicket-keeping skills"
+        ],
+        stats: {
+          matches: 5,
+          runs: 78,
+          average: 15.60,
+          strikeRate: 125.8
+        }
+      },
+      naman: {
+        name: "Naman Dhir",
+        role: "All-rounder",
+        age: 24,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm medium",
+        bio: "Naman Dhir is a promising all-rounder who can contribute with both bat and ball.",
+        achievements: [
+          "Consistent performer",
+          "Useful middle-order option"
+        ],
+        stats: {
+          matches: 12,
+          runs: 156,
+          wickets: 8,
+          strikeRate: 132.5
+        }
+      },
+      raj: {
+        name: "Raj Angad Bawa",
+        role: "All-rounder",
+        age: 21,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm medium",
+        bio: "Raj Angad Bawa was part of India's U-19 World Cup winning squad.",
+        achievements: [
+          "U-19 World Cup winner (2022)",
+          "Player of the Match in U-19 WC final"
+        ],
+        stats: {
+          matches: 8,
+          runs: 92,
+          wickets: 5,
+          strikeRate: 128.3
+        }
+      },
+      danish: {
+        name: "Danish Malewar",
+        role: "Batsman",
+        age: 26,
+        battingStyle: "Left-hand bat",
+        bowlingStyle: "-",
+        bio: "Danish Malewar is a left-handed batsman from Vidarbha with an aggressive approach.",
+        achievements: [
+          "Consistent domestic run-scorer",
+          "Known for explosive batting"
+        ],
+        stats: {
+          matches: 6,
+          runs: 124,
+          average: 20.67,
+          strikeRate: 138.4
+        }
+      },
+      izhar: {
+        name: "Mohammed Izhar",
+        role: "Bowler",
+        age: 23,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm fast-medium",
+        bio: "Mohammed Izhar is an emerging fast bowler with good pace and control.",
+        achievements: [
+          "Promising domestic bowler",
+          "Good economy rate"
+        ],
+        stats: {
+          matches: 4,
+          wickets: 6,
+          average: 21.50,
+          economy: 8.25
+        }
+      },
+      atharva: {
+        name: "Atharva Ankolekar",
+        role: "Spinner",
+        age: 25,
+        battingStyle: "Left-hand bat",
+        bowlingStyle: "Slow left-arm orthodox",
+        bio: "Atharva Ankolekar is a left-arm spinner who can control the middle overs effectively.",
+        achievements: [
+          "Part of MI squad since 2019",
+          "Good economy in IPL"
+        ],
+        stats: {
+          matches: 10,
+          wickets: 12,
+          average: 26.50,
+          economy: 7.45
+        }
+      },
+      mayankr: {
+        name: "Mayank Rawat",
+        role: "Batsman",
+        age: 24,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "-",
+        bio: "Mayank Rawat is an aggressive batsman from Delhi with good power-hitting ability.",
+        achievements: [
+          "Domestic run-scorer",
+          "Strong striker"
+        ],
+        stats: {
+          matches: 7,
+          runs: 98,
+          average: 14.00,
+          strikeRate: 142.0
+        }
+      },
+      hardik: {
+        name: "Hardik Pandya",
+        role: "All-rounder",
+        age: 30,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm fast-medium",
+        bio: "Hardik Pandya is one of India's premier all-rounders and a powerful match-winner.",
+        achievements: [
+          "4x IPL Champion with MI",
+          "Match-winner in pressure situations",
+          "Over 1,400 runs and 40 wickets"
+        ],
+        stats: {
+          matches: 106,
+          runs: 1476,
+          wickets: 42,
+          strikeRate: 146.5
+        }
+      },
+      shardul: {
+        name: "Shardul Thakur",
+        role: "All-rounder",
+        age: 32,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm fast-medium",
+        bio: "Shardul Thakur is a wicket-taking all-rounder who can contribute with both bat and ball.",
+        achievements: [
+          "IPL Champion with CSK (2021)",
+          "Over 85 IPL wickets",
+          "Useful lower-order batsman"
+        ],
+        stats: {
+          matches: 91,
+          wickets: 88,
+          average: 29.50,
+          economy: 9.05
+        }
+      },
+      ashwani: {
+        name: "Ashwani Kumar",
+        role: "Bowler",
+        age: 27,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm fast-medium",
+        bio: "Ashwani Kumar is a pace bowler from Haryana with good control and variations.",
+        achievements: [
+          "Emerging pace talent",
+          "Good domestic record"
+        ],
+        stats: {
+          matches: 3,
+          wickets: 4,
+          average: 28.75,
+          economy: 7.85
+        }
+      },
+      mayankm: {
+        name: "Mayank Markande",
+        role: "Leg Spinner",
+        age: 26,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm leg-break",
+        bio: "Mayank Markande is a leg-spinner with good variations including the googly.",
+        achievements: [
+          "Promising leg-spinner",
+          "Good wicket-taking ability"
+        ],
+        stats: {
+          matches: 35,
+          wickets: 28,
+          average: 32.50,
+          economy: 8.35
+        }
+      },
+      deepak: {
+        name: "Deepak Chahar",
+        role: "Fast Bowler",
+        age: 31,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm medium-fast",
+        bio: "Deepak Chahar is a swing bowler who excels in powerplay overs.",
+        achievements: [
+          "IPL Champion with CSK",
+          "Best figures of 6/7 in T20Is",
+          "Excellent powerplay bowler"
+        ],
+        stats: {
+          matches: 82,
+          wickets: 79,
+          average: 28.20,
+          economy: 8.12
+        }
+      },
+      bumrah: {
+        name: "Jasprit Bumrah",
+        role: "Fast Bowler",
+        age: 30,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "Right-arm fast",
+        bio: "Jasprit Bumrah is one of the most lethal fast bowlers in world cricket with deadly yorkers.",
+        achievements: [
+          "5x IPL Champion with MI",
+          "Over 165 IPL wickets",
+          "Death overs specialist",
+          "Best economy among fast bowlers"
+        ],
+        stats: {
+          matches: 133,
+          wickets: 165,
+          average: 23.34,
+          economy: 7.18
+        }
+      },
+      raghu: {
+        name: "Raghu Sharma",
+        role: "Batsman",
+        age: 25,
+        battingStyle: "Right-hand bat",
+        bowlingStyle: "-",
+        bio: "Raghu Sharma is a middle-order batsman from Himachal Pradesh with solid technique.",
+        achievements: [
+          "Consistent domestic performer",
+          "Good strike rate"
+        ],
+        stats: {
+          matches: 9,
+          runs: 142,
+          average: 17.75,
+          strikeRate: 128.6
+        }
+      }
+    };
+
+    let hasVoted = false;
+    const pollVotes = {
+      "Rohit Sharma": 0,
+      "Suryakumar Yadav": 0,
+      "Tilak Varma": 0,
+      "Hardik Pandya": 0
+    };
+
+    function updatePollDisplay() {
+      const total = Object.values(pollVotes).reduce((a, b) => a + b, 0);
+      const options = document.querySelectorAll('.poll-option');
+      
+      options.forEach(option => {
+        const player = option.dataset.player;
+        const votes = pollVotes[player];
+        const percentage = total > 0 ? Math.round((votes / total) * 100) : 0;
+        
+        const percentageEl = option.querySelector('.poll-percentage');
+        const barEl = option.querySelector('.poll-bar');
+        
+        percentageEl.textContent = `${percentage}%`;
+        barEl.style.width = `${percentage}%`;
+      });
+    }
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'system-ui, -apple-system, sans-serif';
+      const baseSize = config.font_size || defaultConfig.font_size;
+      
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+      // Apply background color
+      const gradientElements = document.querySelectorAll('.gradient-bg');
+      gradientElements.forEach(el => {
+        el.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, ${secondaryActionColor} 100%)`;
+        el.style.color = surfaceColor;
+      });
+
+      // Apply surface color
+      const nav = document.getElementById('main-nav');
+      nav.style.backgroundColor = surfaceColor;
+      nav.style.color = textColor;
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.style.color = textColor;
+      });
+
+      document.querySelectorAll('article, .match-card, .poll-option').forEach(el => {
+        el.style.backgroundColor = surfaceColor;
+        el.style.color = textColor;
+        el.style.borderColor = backgroundColor;
+      });
+
+      // Apply text color
+      document.body.style.color = textColor;
+      document.querySelectorAll('section:not(.gradient-bg)').forEach(el => {
+        el.style.backgroundColor = surfaceColor;
+        el.style.color = textColor;
+      });
+
+      // Apply primary action color
+      const primaryButtons = [
+        document.getElementById('join-community-btn'),
+        document.getElementById('join-submit-btn'),
+        document.getElementById('close-success-btn'),
+        ...document.querySelectorAll('form button[type="submit"]')
+      ];
+      primaryButtons.forEach(btn => {
+        if (btn) {
+          btn.style.backgroundColor = primaryActionColor;
+          btn.style.color = backgroundColor;
+        }
+      });
+
+      document.querySelectorAll('.pulse-animation').forEach(el => {
+        el.style.backgroundColor = primaryActionColor;
+        el.style.color = backgroundColor;
+      });
+
+      document.querySelectorAll('.poll-bar').forEach(el => {
+        el.style.backgroundColor = primaryActionColor;
+      });
+
+      // Apply modal styling
+      const modalContent = document.querySelector('.modal-content');
+      if (modalContent) {
+        modalContent.style.backgroundColor = surfaceColor;
+        modalContent.style.color = textColor;
+      }
+
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      if (closeModalBtn) {
+        closeModalBtn.style.borderColor = textColor;
+        closeModalBtn.style.color = textColor;
+      }
+
+      // Apply fonts
+      document.getElementById('hero-title').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('hero-title').style.fontSize = `${baseSize * 3}px`;
+      
+      document.getElementById('hero-subtitle').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.getElementById('hero-subtitle').style.fontSize = `${baseSize * 1.5}px`;
+
+      document.querySelectorAll('h2').forEach(h => {
+        h.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        h.style.fontSize = `${baseSize * 2}px`;
+      });
+
+      document.querySelectorAll('h3').forEach(h => {
+        h.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        h.style.fontSize = `${baseSize * 1.25}px`;
+      });
+
+      document.querySelectorAll('p, span, a, button').forEach(el => {
+        el.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        el.style.fontSize = `${baseSize}px`;
+      });
+
+      // Update text content
+      document.getElementById('nav-team-name').textContent = config.team_name || defaultConfig.team_name;
+      document.getElementById('nav-tagline').textContent = config.team_tagline || defaultConfig.team_tagline;
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('news-heading').textContent = config.news_heading || defaultConfig.news_heading;
+      document.getElementById('stats-heading').textContent = config.stats_heading || defaultConfig.stats_heading;
+      document.getElementById('footer-text').textContent = config.footer_text || defaultConfig.footer_text;
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Community modal functionality
+    const modal = document.getElementById('community-modal');
+    const joinBtn = document.getElementById('join-community-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const communityForm = document.getElementById('community-form');
+    const successMessage = document.getElementById('success-message');
+    const closeSuccessBtn = document.getElementById('close-success-btn');
+
+    joinBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+      communityForm.reset();
+    });
+
+    closeSuccessBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+      communityForm.classList.remove('hidden');
+      successMessage.classList.add('hidden');
+      communityForm.reset();
+    });
+
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+        communityForm.reset();
+      }
+    });
+
+    communityForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('join-submit-btn');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Joining...';
+      
+      // Get form data
+      const name = document.getElementById('member-name').value;
+      const email = document.getElementById('member-email').value;
+      const city = document.getElementById('member-city').value;
+      
+      // Save to Canva Sheet
+      if (window.dataSdk) {
+        try {
+          const result = await window.dataSdk.create({
+            name: name,
+            email: email,
+            city: city,
+            registeredAt: new Date().toISOString()
+          });
+          
+          // Reset button state
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          
+          if (result.isOk) {
+            // Hide form and show success message
+            communityForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+          } else {
+            // Show error message inline
+            const existingError = communityForm.querySelector('.error-message');
+            if (existingError) existingError.remove();
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message text-red-600 text-sm mt-2 text-center';
+            errorDiv.textContent = 'Failed to save registration. Please try again.';
+            communityForm.appendChild(errorDiv);
+            
+            setTimeout(() => errorDiv.remove(), 3000);
+          }
+        } catch (error) {
+          console.error('Error saving member:', error);
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          
+          const existingError = communityForm.querySelector('.error-message');
+          if (existingError) existingError.remove();
+          
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'error-message text-red-600 text-sm mt-2 text-center';
+          errorDiv.textContent = 'An error occurred. Please try again.';
+          communityForm.appendChild(errorDiv);
+          
+          setTimeout(() => errorDiv.remove(), 3000);
+        }
+      } else {
+        // Data SDK not available (viewing outside Canva)
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        
+        // Show success message anyway for demo purposes
+        communityForm.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        
+        // Update member count locally for demo
+        const memberCount = document.getElementById('member-count');
+        if (memberCount) {
+          const currentCount = parseInt(memberCount.textContent) || 0;
+          memberCount.textContent = currentCount + 1;
+        }
+      }
+    });
+
+    // Poll functionality
+    document.querySelectorAll('.poll-option').forEach(option => {
+      option.addEventListener('click', () => {
+        if (hasVoted) return;
+        
+        const player = option.dataset.player;
+        pollVotes[player]++;
+        hasVoted = true;
+        
+        updatePollDisplay();
+        
+        document.querySelectorAll('.poll-option').forEach(opt => {
+          opt.style.cursor = 'default';
+          opt.style.opacity = '0.7';
+        });
+        
+        option.style.opacity = '1';
+        
+        document.getElementById('poll-message').classList.remove('hidden');
+      });
+    });
+
+    // Newsletter form
+    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('newsletter-message').classList.remove('hidden');
+      document.getElementById('newsletter-email').value = '';
+    });
+
+    // Player card click handlers
+    document.querySelectorAll('[data-player]').forEach(card => {
+      card.addEventListener('click', () => {
+        const playerId = card.dataset.player;
+        const player = playerInfo[playerId];
+        
+        if (player) {
+          const playerModal = document.getElementById('player-modal');
+          const playerContent = document.getElementById('player-info-content');
+          
+          playerContent.innerHTML = `
+            <div class="text-center mb-6">
+              <h3 class="text-3xl font-bold mb-2">${player.name}</h3>
+              <p class="text-lg mb-4">${player.role}</p>
+              <div class="flex justify-center gap-4 text-sm mb-4">
+                <span>Age: ${player.age}</span>
+                <span>${player.battingStyle}</span>
+              </div>
+              ${player.bowlingStyle && player.bowlingStyle !== '-' ? `<p class="text-sm">${player.bowlingStyle}</p>` : ''}
+            </div>
+            
+            <div class="mb-6">
+              <h4 class="text-xl font-bold mb-3">About</h4>
+              <p class="text-sm leading-relaxed">${player.bio}</p>
+            </div>
+            
+            <div class="mb-6">
+              <h4 class="text-xl font-bold mb-3">Career Statistics</h4>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                ${Object.entries(player.stats).map(([key, value]) => `
+                  <div class="p-3 rounded-lg border">
+                    <p class="text-xs uppercase opacity-70">${key.replace(/([A-Z])/g, ' $1').trim()}</p>
+                    <p class="text-2xl font-bold">${value}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-xl font-bold mb-3">Achievements</h4>
+              <ul class="space-y-2">
+                ${player.achievements.map(achievement => `
+                  <li class="flex items-start">
+                    <span class="mr-2">•</span>
+                    <span class="text-sm">${achievement}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          `;
+          
+          playerModal.classList.remove('hidden');
+          playerModal.style.display = 'flex';
+        }
+      });
+    });
+
+    // Close player modal
+    document.getElementById('close-player-modal').addEventListener('click', () => {
+      const playerModal = document.getElementById('player-modal');
+      playerModal.classList.add('hidden');
+      playerModal.style.display = 'none';
+    });
+
+    document.getElementById('player-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'player-modal') {
+        const playerModal = document.getElementById('player-modal');
+        playerModal.classList.add('hidden');
+        playerModal.style.display = 'none';
+      }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+
+    // Initialize Data SDK
+    if (window.dataSdk) {
+      const dataHandler = {
+        onDataChanged(data) {
+          // Update member count display
+          const memberCount = document.getElementById('member-count');
+          if (memberCount) {
+            memberCount.textContent = data.length;
+          }
+        }
+      };
+      
+      window.dataSdk.init(dataHandler);
+    }
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["team_name", config.team_name || defaultConfig.team_name],
+          ["team_tagline", config.team_tagline || defaultConfig.team_tagline],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+          ["news_heading", config.news_heading || defaultConfig.news_heading],
+          ["stats_heading", config.stats_heading || defaultConfig.stats_heading],
+          ["footer_text", config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+
+    // Initialize display
+    onConfigChange(defaultConfig);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b820535835591ac',t:'MTc2NzQzODMxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
